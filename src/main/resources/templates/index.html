@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div>
+    <form th:action="@{/person/add}" th:object="${new_person}" method="post">
+        <input type="text" th:field="*{full_name}" placeholder="ФИО"/>
+        <input type="text" th:field="*{date_of_birth}" placeholder="Дата рождения (01/01/2000)"/>
+        <button type="submit">Сохранить</button>
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person : ${persons}">
+            <td th:text="${person.id}"></td>
+            <td th:text="${person.full_name}"></td>
+            <td th:text="${person.date_of_birth}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
