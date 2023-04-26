@@ -2,6 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+<div>
+    <h2>Hello [[${user_name}]]</h2>
     <form th:action="@{/person/add}" th:object="${new_person}" method="post">
         <input type="text" th:field="*{full_name}" placeholder="ФИО"/>
         <input type="text" th:field="*{date_of_birth}" placeholder="Дата рождения (01/01/2000)"/>

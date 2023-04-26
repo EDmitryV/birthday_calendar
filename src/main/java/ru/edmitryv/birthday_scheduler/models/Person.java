@@ -1,26 +1,32 @@
 package ru.edmitryv.birthday_scheduler.models;
 
 import jakarta.persistence.*;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "persons")
 public class Person {
-    public Person(String full_name, Date date_of_birth){
+    public Person(String full_name, Date date_of_birth) {
         this.full_name = full_name;
         this.date_of_birth = date_of_birth;
     }
 
-    public Person(){}
+    public Person() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "full_name")
     private String full_name;
-    @Column(name="date_of_birth")
+    @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
     private Date date_of_birth;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinColumn(name="user_id", referencedColumnName = "id", nullable = false)
+    private User user;
 
     public Long getId() {
         return id;
@@ -40,5 +46,13 @@ public class Person {
 
     public void setDate_of_birth(Date date_of_birth) {
         this.date_of_birth = date_of_birth;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
